@@ -23,12 +23,14 @@ export class HeroDetailComponent implements OnInit {
 	ngOnInit(): void {
 		this.route.params.forEach((params: Params) => {
 			let id = +params['id'];
-			this.heroService.getHero(id).then(hero => this.hero = hero);
+			//this.heroService.getHero(id).then(hero => this.hero = hero);
+			this.getHero(id).then(hero => this.hero = hero);
 		});
 	}
 
 	getHero(id: number): Promise<Hero> {
-		return this.getHeroes().then(heroes => heroes.find(hero => hero.id === id));
+		//return this.getHeroes().then(heroes => heroes.find(hero => hero.id === id));
+		return this.heroService.getHeroes().then(heroes => heroes.find(hero => hero.id === id));
 	}
 
 	goBack(): void {
