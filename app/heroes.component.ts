@@ -26,7 +26,7 @@ export class HeroesComponent implements OnInit {
 	}
 
 	getHeroes(): void {
-    	this.heroService.getHeroes().then(heroes => this.heroes = heroes);
+		this.heroService.getHeroes().then(heroes => this.heroes = heroes);
 	}
 
 	onSelect(hero: Hero): void {
@@ -36,5 +36,15 @@ export class HeroesComponent implements OnInit {
 	gotoDetail(): void {
 		this.router.navigate(['/detail', this.selectedHero.id]);
 	}
+
+	delete(hero: Hero): void {
+		this.heroService
+		.delete(hero.id)
+		.then(() => {
+			this.heroes = this.heroes.filter(h => h !== hero);
+			if (this.selectedHero === hero) { this.selectedHero = null; }
+		});
+	}
+
 
 }
